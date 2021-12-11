@@ -50,16 +50,15 @@ function draw(){
       frog.y=frog.y+4;
     }
     frog.collide(climbersGroup);
-    if(frog.isTouching(coinGroup)){
-      coinGroup.get(coinIndex).destroy();
-    }
+    // if(frog.isTouching(coinGroup)){
+    //   ;
+    // }
     if(keyDown('right')){
       frog.x=frog.x+4;
     }
     if(keyDown('left')){
       frog.x=frog.x-4;
     }
-
     if(frog.y==450){
       gameState = "end";
     }
