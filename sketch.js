@@ -32,10 +32,7 @@ function setup() {
 
 function draw() {
   background(0);
-  drawSprites();
-  fill("white");
-  textSize(28);
-  text("Score:"+ score,450,40);
+
   spawnCoin();
   if (gameState === "play") {
     ocean.setVelocity(0, 0.7);
@@ -51,8 +48,8 @@ function draw() {
     }
     frog.collide(climbersGroup);
     if (coinGroup.isTouching(frog)) {
+      coinGroup.destroyEach();
       score=score+1;
-      coinGroup.get(0).destroy();
     }
     if (keyDown("right")) {
       frog.x = frog.x + 4;
@@ -74,6 +71,10 @@ function draw() {
     coinGroup.destroyEach();
     climbersGroup.destroyEach();
   }
+  drawSprites();
+  fill("white");
+  textSize(28);
+  text("Score:"+ score,450,40);
 }
 
 // create the coin and climber in the same function
@@ -86,14 +87,13 @@ function spawnCoin() {
     climber.scale = 0.5;
     climbersGroup.add(climber);
     climber.setCollider("rectangle", 0, 0, 500, 100);
-    //climber.debug = "true";
+    climber.lifetime = 500;
 
     coin = createSprite(climber.x, climber.y - 50, 20, 20);
     coin.addImage("coin", coinImg);
     coin.setVelocity(0, 1);
     coin.scale = 0.1;
-    //coin.setCollider("rectangle",0,0,32,32);
-    //coin.debug = "true";
     coinGroup.add(coin);
+    coin.lifetime = 500;
   }
 }
